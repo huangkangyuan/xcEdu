@@ -1,6 +1,10 @@
+#idea ignore
+/idea/
 .idea/
 target/
 *.iml
+
+#pom ignore
 pom.xml.tag
 pom.xml.releaseBackup
 pom.xml.versionsBackup

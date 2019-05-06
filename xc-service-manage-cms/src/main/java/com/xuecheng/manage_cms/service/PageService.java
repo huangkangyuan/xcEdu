@@ -27,7 +27,7 @@ public class PageService {
      */
     public QueryResponseResult findList(int page, int size, QueryPageRequest queryPageRequest){
 
-        //分页参数
+        //分页参数(从零开始的索引页)
         if(page <=0){
             page = 1;
         }
