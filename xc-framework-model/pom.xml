@@ -32,11 +32,13 @@
         <artifactId>lombok</artifactId>
     </dependency>
     <!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-commons -->
+    <!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-commons -->
     <dependency>
         <groupId>org.springframework.data</groupId>
         <artifactId>spring-data-commons</artifactId>
-        <version>1.13.9.RELEASE</version>
+        <version>1.13.20.RELEASE</version>
     </dependency>
+
     <!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-mongodb -->
     <dependency>
         <groupId>org.springframework.data</groupId>
@@ -50,22 +52,6 @@
         <version>5.0.12.Final</version>
     </dependency>
 
-
-
-    <!--        <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-data-mongodb</artifactId>
-            </dependency>-->
-    <!--<dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-data-elasticsearch</artifactId>
-    </dependency>-->
-
-    <!--        <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-data-jpa</artifactId>
-            </dependency>-->
-    <!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
     <dependency>
         <groupId>com.google.guava</groupId>
         <artifactId>guava</artifactId>
