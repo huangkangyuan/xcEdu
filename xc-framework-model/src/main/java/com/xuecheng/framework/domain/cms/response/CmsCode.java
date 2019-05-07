@@ -5,6 +5,7 @@ import lombok.ToString;
 
 @ToString
 public enum CmsCode implements ResultCode {
+    CMS_INVALID_PARAMETER(false, 24000, "非法参数异常！"),
     CMS_ADDPAGE_EXISTSNAME(false, 24001, "页面名称已存在！"),
     CMS_GENERATEHTML_DATAURLISNULL(false, 24002, "从页面信息中找不到获取数据的url！"),
     CMS_GENERATEHTML_DATAISNULL(false, 24003, "根据页面的数据url获取不到数据！"),
