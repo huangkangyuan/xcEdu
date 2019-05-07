@@ -3,7 +3,7 @@
 .idea/
 target/
 *.iml
-
+/.idea/
 #pom ignore
 pom.xml.tag
 pom.xml.releaseBackup
