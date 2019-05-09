@@ -6,7 +6,7 @@ import com.xuecheng.framework.domain.cms.request.QueryPageRequest;
 import com.xuecheng.framework.domain.cms.response.CmsPageResult;
 import com.xuecheng.framework.model.response.QueryResponseResult;
 import com.xuecheng.framework.model.response.ResponseResult;
-import com.xuecheng.manage_cms.service.PageService;
+import com.xuecheng.manage_cms.service.CmsPageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,56 +15,59 @@ import org.springframework.web.bind.annotation.*;
 public class CmsPageController implements CmsPageControllerApi {
 
     @Autowired
-    PageService pageService;
+    CmsPageService cmsPageService;
 
     @Override
     @GetMapping("/list/{page}/{size}")
     public QueryResponseResult findList(@PathVariable("page") int page, @PathVariable("size") int size, QueryPageRequest queryPageRequest) {
         //调用service
-        return pageService.findList(page, size, queryPageRequest);
+        return cmsPageService.findList(page, size, queryPageRequest);
     }
 
     /**
      * 添加页面
-     * @RequestBody 将json数据转成对象
+     *
      * @param cmsPage
      * @return
+     * @RequestBody 将json数据转成对象
      */
     @Override
     @PostMapping("/add")
     public CmsPageResult add(@RequestBody CmsPage cmsPage) {
-        return pageService.add(cmsPage);
+        return cmsPageService.add(cmsPage);
     }
 
     @Override
     @GetMapping("/get/{id}")
     public CmsPage findById(@PathVariable("id") String id) {
-        return pageService.getById(id);
+        return cmsPageService.getById(id);
     }
 
 
     /**
      * 修改页面
-     * @RequestBody 将json数据转成对象
+     *
      * @param id
      * @param cmsPage
      * @return
+     * @RequestBody 将json数据转成对象
      */
     @Override
     @PutMapping("/edit/{id}")
     public CmsPageResult edit(@PathVariable("id") String id, @RequestBody CmsPage cmsPage) {
-        return pageService.update(id, cmsPage);
+        return cmsPageService.update(id, cmsPage);
     }
 
     /**
      * 删除页面
+     *
      * @param id
      * @return
      */
     @Override
     @DeleteMapping("/del/{id}") //使用http的delete方法完成删除操作
     public ResponseResult delete(@PathVariable("id") String id) {
-        return pageService.delete(id);
+        return cmsPageService.delete(id);
     }
 
 }

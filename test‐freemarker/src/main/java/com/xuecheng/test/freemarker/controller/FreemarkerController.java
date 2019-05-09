@@ -17,10 +17,10 @@ public class FreemarkerController {
 
     @RequestMapping("/banner")
     public String index_banner(Map<String, Object> map){
-        String dataUrl = "http://localhost:31001/cms/config/getmodel/5a791725dd573c3574ee333f";
+        String dataUrl = "http://localhost:31001/cms/config/getModel/5a791725dd573c3574ee333f";
         ResponseEntity<Map> forEntity = restTemplate.getForEntity(dataUrl, Map.class);
         Map body = forEntity.getBody();
-        map.put("model",body);
+        map.putAll(body);
         return "index_banner";
     }
 

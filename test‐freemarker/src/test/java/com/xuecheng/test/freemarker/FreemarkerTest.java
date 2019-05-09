@@ -31,7 +31,7 @@ public class FreemarkerTest {
         Configuration configuration=new Configuration(Configuration.getVersion());
         String classpath = this.getClass().getResource("/").getPath();
         //设置模板路径
-        configuration.setDirectoryForTemplateLoading(new File(classpath + "/templates/"));
+        configuration.setDirectoryForTemplateLoading(new File("F:\\IDEA project\\xcEduService\\test‐freemarker\\src\\test\\resources\\templates"));
         //设置字符集
         configuration.setDefaultEncoding("utf-8");
         //加载模板
@@ -44,7 +44,7 @@ public class FreemarkerTest {
         System.out.println(content);
         InputStream inputStream = IOUtils.toInputStream(content);
         //输出文件
-        FileOutputStream fileOutputStream = new FileOutputStream(new File("d:/test1.html"));
+        FileOutputStream fileOutputStream = new FileOutputStream(new File("F:/document/test1.html"));
         int copy = IOUtils.copy(inputStream, fileOutputStream);
     }
 
@@ -78,7 +78,7 @@ public class FreemarkerTest {
         System.out.println(content);
         InputStream inputStream = IOUtils.toInputStream(content);
         //输出文件
-        FileOutputStream fileOutputStream = new FileOutputStream(new File("d:/test1.html"));
+        FileOutputStream fileOutputStream = new FileOutputStream(new File("F:/document/test2.html"));
         IOUtils.copy(inputStream, fileOutputStream);
     }
 

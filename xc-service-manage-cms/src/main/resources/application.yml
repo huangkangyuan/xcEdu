@@ -7,3 +7,9 @@ spring:
     mongodb:
       uri:  mongodb://root:root@localhost:27017
       database: xc_cms
+  freemarker:
+    cache: false #关闭模板缓存，方便测试
+    settings:
+      template_update_delay: 0
+
+
