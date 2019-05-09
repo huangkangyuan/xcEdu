@@ -37,7 +37,7 @@ public class GridFsTest {
         File file = new File("F:/document/index_banner.ftl");
         //定义fileInputStream
         FileInputStream fileInputStream = new FileInputStream(file);
-        ObjectId objectId = gridFsTemplate.store(fileInputStream, "index_banner.ftl11111111111");
+        ObjectId objectId = gridFsTemplate.store(fileInputStream, "index_banner.ftl");
         //5cd23d17595f745e3c9680b8
         System.out.println(objectId);
     }
