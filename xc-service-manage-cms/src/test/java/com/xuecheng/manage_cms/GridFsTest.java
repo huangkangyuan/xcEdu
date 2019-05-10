@@ -30,7 +30,7 @@ public class GridFsTest {
     @Autowired
     GridFSBucket gridFSBucket;//打开一个下载流
 
-    //存文件
+    //存模板文件
     @Test
     public void testStore() throws FileNotFoundException {
         //定义file
