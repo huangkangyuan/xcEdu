@@ -20,3 +20,6 @@ spring:
 
 mybatis:
   mapper-locations: mappers/*.xml
+
+pagehelper:
+  helper-dialect: mysql
