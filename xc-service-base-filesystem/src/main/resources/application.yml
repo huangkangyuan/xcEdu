@@ -23,7 +23,7 @@ spring:
       max-request-size: 30MB
 xuecheng:
   fastdfs:
-    connect_timeout_in_seconds: 30
-    network_timeout_in_seconds: 30
+    connect_timeout_in_seconds: 3000
+    network_timeout_in_seconds: 5000
     charset: UTF-8
     tracker_servers: 47.106.232.70:22122 #多个 trackerServer中间以逗号分隔
