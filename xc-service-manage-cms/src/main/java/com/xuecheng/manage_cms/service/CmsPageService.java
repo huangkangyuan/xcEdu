@@ -4,11 +4,14 @@ import com.alibaba.fastjson.JSON;
 import com.mongodb.client.gridfs.GridFSBucket;
 import com.mongodb.client.gridfs.GridFSDownloadStream;
 import com.mongodb.client.gridfs.model.GridFSFile;
+import com.netflix.discovery.converters.Auto;
 import com.xuecheng.framework.domain.cms.CmsPage;
+import com.xuecheng.framework.domain.cms.CmsSite;
 import com.xuecheng.framework.domain.cms.CmsTemplate;
 import com.xuecheng.framework.domain.cms.request.QueryPageRequest;
 import com.xuecheng.framework.domain.cms.response.CmsCode;
 import com.xuecheng.framework.domain.cms.response.CmsPageResult;
+import com.xuecheng.framework.domain.cms.response.CmsPostPageResult;
 import com.xuecheng.framework.exception.ExceptionCast;
 import com.xuecheng.framework.model.response.CommonCode;
 import com.xuecheng.framework.model.response.QueryResponseResult;
@@ -17,6 +20,7 @@ import com.xuecheng.framework.model.response.ResponseResult;
 import com.xuecheng.manage_cms.config.RabbitmqConfig;
 import com.xuecheng.manage_cms.dao.CmsConfigRepository;
 import com.xuecheng.manage_cms.dao.CmsPageRepository;
+import com.xuecheng.manage_cms.dao.CmsSiteRepository;
 import com.xuecheng.manage_cms.dao.CmsTemplateRepository;
 import freemarker.cache.StringTemplateLoader;
 import freemarker.template.Configuration;
@@ -66,6 +70,8 @@ public class CmsPageService {
     @Autowired
     RabbitTemplate rabbitTemplate;
 
+    @Autowired
+    CmsSiteRepository cmsSiteRepository;
     /**
      * 页面查询方法
      *
@@ -126,7 +132,6 @@ public class CmsPageService {
         //校验页面是否存在，根据页面名称、站点Id、页面webpath查询
         CmsPage cmsPage1 = cmsPageRepository.findByPageNameAndSiteIdAndPageWebPath(cmsPage.getPageName(),
                 cmsPage.getSiteId(), cmsPage.getPageWebPath());
-
         if (cmsPage1 != null) {
             //抛出异常
             //页面已经存在
@@ -347,4 +352,63 @@ public class CmsPageService {
         cmsPageRepository.save(cmsPage);
         return cmsPage;
     }
+
+    //添加页面，如果已存在则更新页面
+    public CmsPageResult save(CmsPage cmsPage){
+        //校验页面是否存在，根据页面名称、站点Id、页面webpath查询
+        CmsPage cms_Page =
+                cmsPageRepository.findByPageNameAndSiteIdAndPageWebPath(cmsPage.getPageName(),
+                        cmsPage.getSiteId(), cmsPage.getPageWebPath());
+        if(cms_Page !=null){
+             //更新
+            return this.update(cms_Page.getPageId(),cmsPage);
+        }else{
+            //添加
+            return this.add(cmsPage);
+        }
+    }
+
+    //一键发布页面
+    public CmsPostPageResult postPageQuick(CmsPage cmsPage){
+        //添加页面
+        CmsPageResult cmsPageResult = this.save(cmsPage);
+        if(!cmsPageResult.isSuccess()){
+            return new CmsPostPageResult(CommonCode.FAIL,null);
+        }
+        CmsPage cmsPageSave = cmsPageResult.getCmsPage();
+        //要布的页面id
+        String pageId = cmsPageSave.getPageId();
+        //发布页面
+        ResponseResult responseResult = this.postPage(pageId);
+        if(!responseResult.isSuccess()){
+            return new CmsPostPageResult(CommonCode.FAIL,null);
+        }
+        //得到页面的url
+        //页面url=站点域名+站点webPath+页面webPath+页面名称
+        //站点id
+        String siteId = cmsPageSave.getSiteId();
+        //查询站点信息
+        CmsSite cmsSite = findCmsSiteById(siteId);
+        //站点域名
+        String siteDomain = cmsSite.getSiteDomain();
+        //站点web路径
+        String siteWebPath = cmsSite.getSiteWebPath();
+        //页面web路径
+        String pageWebPath = cmsPageSave.getPageWebPath();
+        //页面名称
+        String pageName = cmsPageSave.getPageName();
+        //页面的web访问地址
+        String pageUrl = siteDomain+siteWebPath+pageWebPath+pageName;
+        return new CmsPostPageResult(CommonCode.SUCCESS,pageUrl);
+    }
+
+    //根据id查询站点信息
+    public CmsSite findCmsSiteById(String siteId){
+        Optional<CmsSite> optional = cmsSiteRepository.findById(siteId);
+        if(optional.isPresent()){
+            return optional.get();
+        }
+        return null;
+    }
+
 }

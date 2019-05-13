@@ -5,10 +5,6 @@ import com.xuecheng.framework.model.response.ResultCode;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.ToString;
 
-
-/**
- * Created by admin on 2018/3/5.
- */
 @ToString
 public enum CourseCode implements ResultCode {
     COURSE_DENIED_DELETE(false,31001,"删除课程失败，只允许删除本机构的课程！"),
@@ -17,7 +13,8 @@ public enum CourseCode implements ResultCode {
     COURSE_PUBLISH_COURSEIDISNULL(false,31004,"课程Id为空！"),
     COURSE_PUBLISH_VIEWERROR(false,31005,"发布课程视图出错！"),
     COURSE_MEDIS_URLISNULL(false,31101,"选择的媒资文件访问地址为空！"),
-    COURSE_MEDIS_NAMEISNULL(false,31102,"选择的媒资文件名称为空！");
+    COURSE_MEDIS_NAMEISNULL(false,31102,"选择的媒资文件名称为空！"),
+    COURSE_GET_NOTEXISTS(false,31102,"选择的课程不存在！");
 
     //操作代码
     @ApiModelProperty(value = "操作是否成功", example = "true", required = true)

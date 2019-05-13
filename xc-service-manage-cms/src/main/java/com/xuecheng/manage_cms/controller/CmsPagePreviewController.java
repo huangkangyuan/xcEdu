@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.ServletOutputStream;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 
 @Controller
 @RequestMapping(value = "/cms/page")
@@ -23,10 +24,9 @@ public class CmsPagePreviewController extends BaseController {
     public void preview(@PathVariable("pageId") String pageId) throws IOException {
         //执行静态化
         String pageHtml = cmsPageService.getPageHtml(pageId);
-
         //通过response对象将内容输出
         ServletOutputStream outputStream = response.getOutputStream();
-
-        outputStream.write(pageHtml.getBytes("utf-8"));
+        response.setHeader("Content-type","text/html;charset=UTF-8");
+        outputStream.write(pageHtml.getBytes(StandardCharsets.UTF_8));
     }
 }
