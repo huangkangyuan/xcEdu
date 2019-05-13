@@ -51,6 +51,4 @@ public class CmsPage {
     //数据Url
     private String dataUrl;
 
-
-
 }

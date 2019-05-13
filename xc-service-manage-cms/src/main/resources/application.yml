@@ -1,5 +1,5 @@
 server:
-  port: 31001
+  port: ${PORT:31001}
 spring:
   application:
     name: xc-service-manage-cms
@@ -23,3 +23,13 @@ xuecheng:
     queue: queue_cms_postpage_01
     routingKey: 5a751fab6abb5044e0d19ea1	#此routingKey为门户站点ID
 
+eureka:
+  client:
+    registerWithEureka: true #服务注册开关
+    fetchRegistry: true #服务发现开关
+    serviceUrl: #Eureka客户端与Eureka服务端进行交互的地址，多个中间用逗号分隔
+      defaultZone: ${EUREKA_SERVER:http://localhost:50101/eureka/,http://localhost:50102/eureka/}
+  instance:
+    prefer-ip-address:  true  #将自己的ip地址注册到Eureka服务中
+    ip-address: ${IP_ADDRESS:127.0.0.1}
+    instance-id: ${spring.application.name}:${server.port} #指定实例id
