@@ -65,4 +65,6 @@ public interface CourseControllerApi {
     @ApiOperation("发布课程")
     public CoursePublishResult publish(@PathVariable String id);
 
+    @ApiOperation("查询教师信息")
+    public CoursePublishResult findTeacherInfo(@PathVariable String id);
 }

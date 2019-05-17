@@ -122,4 +122,10 @@ public class CourseController implements CourseControllerApi {
         return courseService.publish(id);
     }
 
+    @Override
+    @PostMapping("/teacher//get/{id}")
+    public CoursePublishResult findTeacherInfo(@PathVariable String id) {
+        return courseService.findTeacherInfo(id);
+    }
+
 }
