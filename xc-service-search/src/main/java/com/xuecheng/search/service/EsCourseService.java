@@ -115,6 +115,9 @@ public class EsCourseService {
                 CoursePub coursePub = new CoursePub();
                 //源文档
                 Map<String, Object> sourceAsMap = hit.getSourceAsMap();
+                //课程id
+                String id = (String) sourceAsMap.get("id");
+                coursePub.setId(id);
                 //取出name
                 String name = (String) sourceAsMap.get("name");
                 //取出高亮字段

@@ -60,8 +60,8 @@ public class CourseService {
     @Autowired
     CoursePubRepository coursePubRepository;
 
-    @Autowired
-    CourseTeacherRepository courseTeacherRepository;
+//    @Autowired
+//    CourseTeacherRepository courseTeacherRepository;
 
     @Value("${course‐publish.dataUrlPre}")
     private String publish_dataUrlPre;
@@ -453,9 +453,5 @@ public class CourseService {
         //将课程计划信息json串保存到 course_pub中
         coursePub.setTeachplan(jsonString);
         return coursePub;
-    }
-
-    public CoursePublishResult findTeacherInfo(String id) {
-        return null;
     }
 }
