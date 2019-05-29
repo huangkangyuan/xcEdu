@@ -6,9 +6,6 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.ToString;
 
 
-/**
- * Created by admin on 2018/3/5.
- */
 @ToString
 public enum MediaCode implements ResultCode {
     UPLOAD_FILE_REGISTER_FAIL(false,22001,"上传文件在系统注册失败，请刷新页面重试！"),
