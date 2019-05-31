@@ -9,6 +9,8 @@ spring:
       database: xc_media
 xc-service-manage-media:
   upload-location: F:/WebStormProject/video/
+  mq:
+    routingkey-media-video: routingkey_media_video
 eureka:
   client:
     registerWithEureka: true #服务注册开关

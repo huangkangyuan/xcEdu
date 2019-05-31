@@ -60,6 +60,9 @@ public class CourseService {
     @Autowired
     CoursePubRepository coursePubRepository;
 
+    @Autowired
+    TeachplanMediaRepository teachplanMediaRepository;
+
 //    @Autowired
 //    CourseTeacherRepository courseTeacherRepository;
 
@@ -453,5 +456,46 @@ public class CourseService {
         //将课程计划信息json串保存到 course_pub中
         coursePub.setTeachplan(jsonString);
         return coursePub;
+    }
+
+    //保存课程计划与媒资文件的关联信息
+    public ResponseResult saveMedia(TeachplanMedia teachplanMedia) {
+        if(teachplanMedia == null || StringUtils.isEmpty(teachplanMedia.getTeachplanId())){
+            ExceptionCast.cast(CommonCode.INVALID_PARAM);
+        }
+        //校验课程计划是否是3级
+        //课程计划
+        String teachplanId = teachplanMedia.getTeachplanId();
+        //查询到课程计划
+        Optional<Teachplan> optional = teachplanRepository.findById(teachplanId);
+        if(!optional.isPresent()){
+            ExceptionCast.cast(CommonCode.INVALID_PARAM);
+        }
+        //查询到教学计划
+        Teachplan teachplan = optional.get();
+        //取出等级
+        String grade = teachplan.getGrade();
+        if(StringUtils.isEmpty(grade) || !grade.equals("3")){
+            //只允许选择第三级的课程计划关联视频
+            ExceptionCast.cast(CourseCode.COURSE_MEDIA_TEACHPLAN_GRADEERROR);
+        }
+        //查询teachplanMedia
+        Optional<TeachplanMedia> mediaOptional = teachplanMediaRepository.findById(teachplanId);
+        TeachplanMedia newTeachplanMedia = null;
+        if(mediaOptional.isPresent()){
+            newTeachplanMedia = mediaOptional.get();
+        }else{
+            newTeachplanMedia = new TeachplanMedia();
+        }
+
+        //将one保存到数据库
+        newTeachplanMedia.setCourseId(teachplan.getCourseid());//课程id
+        newTeachplanMedia.setMediaId(teachplanMedia.getMediaId());//媒资文件的id
+        newTeachplanMedia.setMediaFileOriginalName(teachplanMedia.getMediaFileOriginalName());//媒资文件的原始名称
+        newTeachplanMedia.setMediaUrl(teachplanMedia.getMediaUrl());//媒资文件的url
+        newTeachplanMedia.setTeachplanId(teachplanId);
+        teachplanMediaRepository.save(newTeachplanMedia);
+
+        return new ResponseResult(CommonCode.SUCCESS);
     }
 }

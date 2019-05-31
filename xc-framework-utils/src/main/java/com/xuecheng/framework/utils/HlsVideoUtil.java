@@ -78,7 +78,6 @@ public class HlsVideoUtil extends  VideoUtil {
         } catch (Exception ex) {
 
             ex.printStackTrace();
-
         }
         //通过查看视频时长判断是否成功
         Boolean check_video_time = check_video_time(video_path, m3u8folder_path + m3u8_name);
@@ -91,8 +90,6 @@ public class HlsVideoUtil extends  VideoUtil {
             return outstring;
         }
         return "success";
-
-
     }
 
 
