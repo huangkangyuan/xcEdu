@@ -23,7 +23,7 @@
             <p class="tit">${courseBase.name}</p>
             <p class="pic"><span class="new-pic">特惠价格￥${(courseMarket.price)!""}</span> <span class="old-pic">原价￥${(courseMarket.price_old)!""}</span></p>
             <p class="info">
-                <a href="http://ucenter.xuecheng.com/#/learning/${courseBase.id}/0"  target="_blank" v-if="learnstatus == 1" v-cloak>马上学习</a>
+                <a href="http://ucenter.xc.com/#/learning/${courseBase.id}/0"  target="_blank" v-if="learnstatus == 1" v-cloak>马上学习</a>
                 <a href="#"  @click="addopencourse" v-if="learnstatus == 2" v-cloak>立即报名</a>
                 <a href="#"  @click="buy" v-if="learnstatus == 3" v-cloak>立即购买</a>
                 <span><em>难度等级</em>
