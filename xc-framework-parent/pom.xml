@@ -58,7 +58,6 @@
                 <artifactId>mybatis-spring-boot-starter</artifactId>
                 <version>${mybatis-spring-boot.version}</version>
             </dependency>
-            <!-- https://mvnrepository.com/artifact/com.github.pagehelper/pagehelper-spring-boot-starter -->
             <dependency>
                 <groupId>com.github.pagehelper</groupId>
                 <artifactId>pagehelper-spring-boot-starter</artifactId>
@@ -76,11 +75,11 @@
                 <artifactId>okhttp</artifactId>
                 <version>${okhttp.version}</version>
             </dependency>
-            <!-- https://mvnrepository.com/artifact/io.github.openfeign/feign-okhttp -->
+
             <dependency>
-                <groupId>io.github.openfeign</groupId>
+                <groupId>com.netflix.feign</groupId>
                 <artifactId>feign-okhttp</artifactId>
-                <version>10.1.0</version>
+                <version>8.18.0</version>
             </dependency>
 
             <dependency>
