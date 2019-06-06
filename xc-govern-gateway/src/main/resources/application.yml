@@ -1,0 +1,68 @@
+server:
+  port: 50201
+  servlet:
+    context-path: /api
+spring:
+  application:
+    name: xc-govern-gateway
+  redis:
+    host: ${REDIS_HOST:127.0.0.1}
+    port: ${REDIS_PORT:6379}
+    timeout: 5000 #连接超时 毫秒
+    jedis:
+      pool:
+        maxActive: 3
+        maxIdle: 3
+        minIdle: 1
+        maxWait: -1 #连接池最大等行时间 -1没有限制
+zuul:
+  routes:
+    manage-course:
+      path: /course/**
+      serviceId: xc-service-manage-course #微服务名称，网关会从eureka中获取该服务名称下的服务实例的地址
+      # 例子：将请求转发到http://localhost:31200/course
+      #url: http://www.baidu.com #也可指定url，此url也可以是外网地址\
+      strip-prefix: false #true：代理转发时去掉前缀，false:代理转发时不去掉前缀
+      sensitiveHeaders:  #默认zuul会屏蔽cookie，cookie不会传到下游服务，这里设置为空则取消默认的黑名单，如果设置了具体的头信息则不会传到下游服务
+      #   ignoredHeaders: 默认为空表示不过虑任何头
+    xc-service-learning:  #路由名称，名称任意，保持所有路由名称唯一
+      path: /learning/**
+      serviceId: xc-service-learning #指定服务id，从Eureka中找到服务的ip和端口
+      strip-prefix: false
+      sensitiveHeaders:
+    manage-cms:
+      path: /cms/**
+      serviceId: xc-service-manage-cms
+      strip-prefix: false
+      sensitiveHeaders:
+    manage-sys:
+      path: /sys/**
+      serviceId: xc-service-manage-cms
+      strip-prefix: false
+      sensitiveHeaders:
+    service-ucenter:
+      path: /ucenter/**
+      serviceId: xc-service-ucenter
+      sensitiveHeaders:
+      strip-prefix: false
+    xc-service-manage-order:
+      path: /order/**
+      serviceId: xc-service-manage-order
+      sensitiveHeaders:
+      strip-prefix: false
+eureka:
+  client:
+    registerWithEureka: true #服务注册开关
+    fetchRegistry: true #服务发现开关
+    serviceUrl: #Eureka客户端与Eureka服务端进行交互的地址，多个中间用逗号分隔
+      defaultZone: ${EUREKA_SERVER:http://localhost:50101/eureka/}
+  instance:
+    prefer-ip-address:  true  #将自己的ip地址注册到Eureka服务中
+    ip-address: 127.0.0.1
+    instance-id: ${spring.application.name}:${server.port} #指定实例id
+ribbon:
+  MaxAutoRetries: 2 #最大重试次数，当Eureka中可以找到服务，但是服务连不上时将会重试，如果eureka中找不到服务则直接走断路器
+  MaxAutoRetriesNextServer: 3 #切换实例的重试次数
+  OkToRetryOnAllOperations: false  #对所有操作请求都进行重试，如果是get则可以，如果是post，put等操作没有实现幂等的情况下是很危险的,所以设置为false
+  ConnectTimeout: 5000  #请求连接的超时时间
+  ReadTimeout: 6000 #请求处理的超时时间
