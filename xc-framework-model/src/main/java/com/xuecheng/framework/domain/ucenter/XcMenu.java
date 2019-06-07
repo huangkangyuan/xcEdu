@@ -7,9 +7,6 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import java.util.Date;
 
-/**
- * Created by admin on 2018/3/19.
- */
 @Data
 @ToString
 @Entity
@@ -39,6 +36,4 @@ public class XcMenu {
     private Date createTime;
     @Column(name="update_time")
     private Date updateTime;
-
-
 }

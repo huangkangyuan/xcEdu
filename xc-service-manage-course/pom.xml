@@ -108,6 +108,5 @@
             <version>2.0.14.RELEASE</version>
             <scope>compile</scope>
         </dependency>
-
     </dependencies>
 </project>

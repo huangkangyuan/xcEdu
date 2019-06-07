@@ -15,7 +15,8 @@ public enum AuthCode implements ResultCode {
     AUTH_CREDENTIAL_ERROR(false,23005,"账号或密码错误！"),
     AUTH_LOGIN_ERROR(false,23006,"登陆过程出现异常请尝试重新操作！"),
     AUTH_LOGIN_APPLYTOKEN_FAIL(false,23007,"申请令牌失败！"),
-    AUTH_LOGIN_TOKEN_SAVEFAIL(false,23008,"存储令牌失败！");
+    AUTH_LOGIN_TOKEN_SAVEFAIL(false,23008,"存储令牌失败！"),
+    AUTH_LOGOUT_FAIL(false,23008,"退出失败！");
 
     //操作代码
     @ApiModelProperty(value = "操作是否成功", example = "true", required = true)

@@ -17,6 +17,10 @@
         (SELECT pic FROM course_pic WHERE courseid = course_base.id) pic
         FROM
         course_base
+        where 1=1
+        <if test="companyId!=null and companyId!=''">
+            and course_base.company_id = #{companyId}
+        </if>
 </select>
 
 </mapper>

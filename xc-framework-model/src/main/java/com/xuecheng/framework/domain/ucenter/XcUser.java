@@ -7,9 +7,6 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import java.util.Date;
 
-/**
- * Created by admin on 2018/3/19.
- */
 @Data
 @ToString
 @Entity
@@ -25,17 +22,22 @@ public class XcUser {
     private String password;
     private String salt;
     private String name;
-    private String utype;
+
+    @Column(name="utype")
+    private String uType;
     private String birthday;
-    private String userpic;
+
+    @Column(name="userpic")
+    private String userPic;
+
     private String sex;
     private String email;
     private String phone;
     private String status;
+
     @Column(name="create_time")
     private Date createTime;
+
     @Column(name="update_time")
     private Date updateTime;
-
-
 }
