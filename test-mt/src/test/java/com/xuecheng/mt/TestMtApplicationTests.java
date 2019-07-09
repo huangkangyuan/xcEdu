@@ -36,7 +36,7 @@ public class TestMtApplicationTests {
         AddressList addressList = new AddressList();
 
         Person person = new Person();
-        person.setName("黄康远1");
+        person.setName("黄康远33333");
 
         PhoneNumber phoneNumber1 = new PhoneNumber();
         phoneNumber1.setPhone("18078800425");
@@ -74,7 +74,7 @@ public class TestMtApplicationTests {
         Optional<Person> personOptional = personRepository.findById(person.getPersonId());
         if(personOptional.isPresent()){
             Person oldPerson = personOptional.get();
-            oldPerson.setName("黄康远2");
+            oldPerson.setName(person.getName());
             oldPerson.setContent("这是xxxx亲戚");
             personRepository.save(oldPerson);
         }
